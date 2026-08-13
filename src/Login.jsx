@@ -50,7 +50,7 @@ function Login() {
         <input
           data-testid="input-email"
           style={styles.input}
-          placeholder="Email corporativo"
+          placeholder="Digite seu email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
@@ -69,7 +69,7 @@ function Login() {
           style={styles.button}
           onClick={handleLogin}
         >
-          Entrar
+          Acessar
         </button>
       </div>
     </div>
