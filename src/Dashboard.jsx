@@ -106,7 +106,7 @@ function Dashboard() {
 
             <input
               data-testid="input-produto"
-              placeholder="Nome do produto"
+              placeholder="Descrição do produto"
               style={styles.inputModal}
             />
 
@@ -122,8 +122,8 @@ function Dashboard() {
                 style={styles.salvar}
                 onClick={() => setModalAberto(false)}
               >
-                Salvar
-              </button>
+                Confirmar
+              </button>       
 
               <button
                 style={styles.cancelar}
