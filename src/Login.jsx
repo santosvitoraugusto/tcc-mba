@@ -60,6 +60,11 @@ function Login() {
         />
 
         <input
+          style={styles.input}
+          placeholder="Departamento"
+        />
+
+        <input
           data-testid="campo-email"
           style={styles.input}
           placeholder="Digite seu email"
