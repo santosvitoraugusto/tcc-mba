@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function Dashboard() {
   const [busca, setBusca] = useState("");
+  const [modalAberto, setModalAberto] = useState(false);
 
   const produtos = [
     {
@@ -58,6 +59,14 @@ function Dashboard() {
       <div style={styles.tableContainer}>
         <h2>Estoque</h2>
 
+        <button
+          data-testid="botao-novo-produto"
+          style={styles.botaoNovo}
+          onClick={() => setModalAberto(true)}
+        >
+          Novo Produto
+        </button>
+
         <input
           type="text"
           placeholder="Buscar produto"
@@ -89,6 +98,43 @@ function Dashboard() {
           </tbody>
         </table>
       </div>
+
+      {modalAberto && (
+        <div style={styles.overlay}>
+          <div style={styles.modal}>
+            <h2>Novo Produto</h2>
+
+            <input
+              data-testid="input-produto"
+              placeholder="Nome do produto"
+              style={styles.inputModal}
+            />
+
+            <input
+              data-testid="input-quantidade"
+              placeholder="Quantidade"
+              style={styles.inputModal}
+            />
+
+            <div style={styles.modalButtons}>
+              <button
+                data-testid="botao-salvar"
+                style={styles.salvar}
+                onClick={() => setModalAberto(false)}
+              >
+                Salvar
+              </button>
+
+              <button
+                style={styles.cancelar}
+                onClick={() => setModalAberto(false)}
+              >
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -136,6 +182,17 @@ const styles = {
     borderRadius: "10px",
   },
 
+  botaoNovo: {
+    marginBottom: "20px",
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "5px",
+    backgroundColor: "#38bdf8",
+    color: "#000",
+    fontWeight: "bold",
+    cursor: "pointer",
+  },
+
   inputBusca: {
     width: "100%",
     boxSizing: "border-box",
@@ -161,6 +218,60 @@ const styles = {
   td: {
     padding: "10px",
     borderBottom: "1px solid #334155",
+  },
+
+  overlay: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0,0,0,0.7)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  modal: {
+    backgroundColor: "#1e293b",
+    padding: "30px",
+    borderRadius: "10px",
+    width: "400px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "15px",
+  },
+
+  inputModal: {
+    padding: "10px",
+    borderRadius: "5px",
+    border: "1px solid #334155",
+    backgroundColor: "#0f172a",
+    color: "#fff",
+  },
+
+  modalButtons: {
+    display: "flex",
+    justifyContent: "flex-end",
+    gap: "10px",
+  },
+
+  salvar: {
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "5px",
+    backgroundColor: "#22c55e",
+    color: "#fff",
+    cursor: "pointer",
+  },
+
+  cancelar: {
+    padding: "10px 20px",
+    border: "none",
+    borderRadius: "5px",
+    backgroundColor: "#ef4444",
+    color: "#fff",
+    cursor: "pointer",
   },
 };
 
