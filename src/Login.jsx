@@ -53,7 +53,7 @@ function Login() {
         />
 
         <input
-          data-testid="input-email"
+          data-testid="campo-email"
           style={styles.input}
           placeholder="Digite seu email"
           value={email}
