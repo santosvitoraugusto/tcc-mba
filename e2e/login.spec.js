@@ -4,7 +4,7 @@ test('login com sucesso', async ({ page }) => {
   await page.goto('http://localhost:5173');
 
   await page.fill(
-    '[data-testid="input-email"]',
+    '[data-testid="campo-email"]',
     'admin@test.com'
   );
 
@@ -26,7 +26,7 @@ test('login com erro', async ({ page }) => {
   await page.goto('http://localhost:5173');
 
   await page.fill(
-    '[data-testid="input-email"]',
+    '[data-testid="campo-email"]',
     'teste@erro.com'
   );
 
