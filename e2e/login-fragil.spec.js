@@ -4,7 +4,7 @@ test('login frágil com placeholder', async ({ page }) => {
   await page.goto('http://localhost:5173');
 
   await page
-    .getByPlaceholder('Email corporativo')
+    .getByPlaceholder('Digite seu email')
     .fill('admin@test.com');
 
   await page
@@ -12,7 +12,7 @@ test('login frágil com placeholder', async ({ page }) => {
     .fill('123');
 
   await page
-    .getByText('Entrar')
+    .getByText('Acessar')
     .click();
 
   await expect(
