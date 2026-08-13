@@ -48,6 +48,11 @@ function Login() {
         )}
 
         <input
+          style={styles.input}
+          placeholder="Código da empresa"
+        />
+
+        <input
           data-testid="input-email"
           style={styles.input}
           placeholder="Digite seu email"
