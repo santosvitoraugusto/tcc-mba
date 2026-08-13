@@ -18,7 +18,7 @@ test('modal frágil usando estrutura e texto', async ({ page }) => {
     .click();
 
   await page
-    .getByPlaceholder('Nome do produto')
+    .getByPlaceholder('Descrição do produto')
     .fill('Teclado Mecânico');
 
   await page
@@ -26,7 +26,7 @@ test('modal frágil usando estrutura e texto', async ({ page }) => {
     .fill('10');
 
   await page
-    .getByText('Salvar', { exact: true })
+    .getByText('Confirmar', { exact: true })
     .click();
 
   await expect(
