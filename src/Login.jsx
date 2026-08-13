@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "./assets/armazena_pro.png";
 
 function Login() {
@@ -7,10 +8,16 @@ function Login() {
   const [mensagem, setMensagem] = useState("");
   const [tipoMensagem, setTipoMensagem] = useState("");
 
+  const navigate = useNavigate();
+
   function handleLogin() {
     if (email === "admin@test.com" && senha === "123") {
       setMensagem("Login realizado com sucesso!");
       setTipoMensagem("sucesso");
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1000);
     } else {
       setMensagem("Email ou senha inválidos");
       setTipoMensagem("erro");
