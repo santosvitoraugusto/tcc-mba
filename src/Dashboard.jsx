@@ -3,8 +3,10 @@ import { useState } from "react";
 function Dashboard() {
   const [busca, setBusca] = useState("");
   const [modalAberto, setModalAberto] = useState(false);
+  const [novoProduto, setNovoProduto] = useState("");
+  const [novaQuantidade, setNovaQuantidade] = useState("");
 
-  const produtos = [
+  const [produtos, setProdutos] = useState([
     {
       id: 1,
       nome: "Notebook Dell",
@@ -23,11 +25,33 @@ function Dashboard() {
       quantidade: 0,
       status: "Sem estoque",
     },
-  ];
+  ]);
 
   const produtosFiltrados = produtos.filter((produto) =>
     produto.nome.toLowerCase().includes(busca.toLowerCase())
   );
+
+  function salvarProduto() {
+    const quantidade = Number(novaQuantidade);
+
+    const novoItem = {
+      id: produtos.length + 1,
+      nome: novoProduto,
+      quantidade,
+      status:
+        quantidade === 0
+          ? "Sem estoque"
+          : quantidade <= 5
+          ? "Baixo estoque"
+          : "Em estoque",
+    };
+
+    setProdutos([...produtos, novoItem]);
+
+    setNovoProduto("");
+    setNovaQuantidade("");
+    setModalAberto(false);
+  }
 
   return (
     <div style={styles.container}>
@@ -108,22 +132,26 @@ function Dashboard() {
               data-testid="input-produto"
               placeholder="Descrição do produto"
               style={styles.inputModal}
+              value={novoProduto}
+              onChange={(e) => setNovoProduto(e.target.value)}
             />
 
             <input
               data-testid="input-quantidade"
               placeholder="Quantidade"
               style={styles.inputModal}
+              value={novaQuantidade}
+              onChange={(e) => setNovaQuantidade(e.target.value)}
             />
 
             <div style={styles.modalButtons}>
               <button
                 data-testid="botao-salvar"
                 style={styles.salvar}
-                onClick={() => setModalAberto(false)}
+                onClick={salvarProduto}
               >
                 Confirmar
-              </button>       
+              </button>
 
               <button
                 style={styles.cancelar}
