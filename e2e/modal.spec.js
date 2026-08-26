@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('abrir modal de novo produto', async ({ page }) => {
+test('cadastrar novo produto pelo modal', async ({ page }) => {
   await page.goto('http://localhost:5173');
 
   await page.getByTestId('campo-email')
@@ -33,4 +33,18 @@ test('abrir modal de novo produto', async ({ page }) => {
   await expect(
     page.getByRole('heading', { name: 'Novo Produto' })
   ).not.toBeVisible();
+
+  const linhaProduto = page.getByRole('row').filter({
+    hasText: 'Teclado Mecânico'
+  });
+
+  await expect(linhaProduto).toBeVisible();
+
+  await expect(
+    linhaProduto.getByText('10', { exact: true })
+  ).toBeVisible();
+
+  await expect(
+    linhaProduto.getByText('Em estoque', { exact: true })
+  ).toBeVisible();
 });
