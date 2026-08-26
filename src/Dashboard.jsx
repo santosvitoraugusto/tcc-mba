@@ -36,6 +36,18 @@ function Dashboard() {
     setSalvando(true);
 
     setTimeout(() => {
+      const produtoDuplicado = produtos.some(
+        (produto) =>
+          produto.nome.toLowerCase() ===
+          novoProduto.toLowerCase()
+      );
+
+      if (produtoDuplicado) {
+        alert("Produto já cadastrado");
+        setSalvando(false);
+        return;
+      }
+
       const quantidade = Number(novaQuantidade);
 
       const novoItem = {
