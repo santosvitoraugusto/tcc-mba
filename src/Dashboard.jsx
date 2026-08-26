@@ -5,6 +5,7 @@ function Dashboard() {
   const [modalAberto, setModalAberto] = useState(false);
   const [novoProduto, setNovoProduto] = useState("");
   const [novaQuantidade, setNovaQuantidade] = useState("");
+  const [salvando, setSalvando] = useState(false);
 
   const [produtos, setProdutos] = useState([
     {
@@ -32,25 +33,30 @@ function Dashboard() {
   );
 
   function salvarProduto() {
-    const quantidade = Number(novaQuantidade);
+    setSalvando(true);
 
-    const novoItem = {
-      id: produtos.length + 1,
-      nome: novoProduto,
-      quantidade,
-      status:
-        quantidade === 0
-          ? "Sem estoque"
-          : quantidade <= 5
-          ? "Baixo estoque"
-          : "Em estoque",
-    };
+    setTimeout(() => {
+      const quantidade = Number(novaQuantidade);
 
-    setProdutos([...produtos, novoItem]);
+      const novoItem = {
+        id: produtos.length + 1,
+        nome: novoProduto,
+        quantidade,
+        status:
+          quantidade === 0
+            ? "Sem estoque"
+            : quantidade <= 5
+              ? "Baixo estoque"
+              : "Em estoque",
+      };
 
-    setNovoProduto("");
-    setNovaQuantidade("");
-    setModalAberto(false);
+      setProdutos([...produtos, novoItem]);
+
+      setNovoProduto("");
+      setNovaQuantidade("");
+      setModalAberto(false);
+      setSalvando(false);
+    }, 2000);
   }
 
   return (
@@ -147,10 +153,14 @@ function Dashboard() {
             <div style={styles.modalButtons}>
               <button
                 data-testid="botao-salvar"
-                style={styles.salvar}
+                style={{
+                  ...styles.salvar,
+                  opacity: salvando ? 0.5 : 1,
+                }}
                 onClick={salvarProduto}
+                disabled={salvando}
               >
-                Confirmar
+                {salvando ? "Salvando..." : "Confirmar"}
               </button>
 
               <button
